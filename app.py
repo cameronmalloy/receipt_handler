@@ -34,10 +34,14 @@ def home():
         print(len(nparr))
         image = cv2.imdecode(nparr, cv2.COLOR_BGR2GRAY)
         result = bw_scanner(image)
+        print(len(result))
         text = pytesseract.image_to_string(Image.fromarray(result))
+        print(text)
         data = re.findall(r'(.*) (.*[\.,] ?\d{1,2})[^\d]', text)
+        print(data)
         ret = {'data': []}
         for name, price in data:
             data_value = {name: price}
             ret['data'].append(data_value)
+        print(ret)
         return json.dumps(ret)
