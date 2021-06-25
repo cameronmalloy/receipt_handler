@@ -10,7 +10,9 @@ def home():
     if request.method == 'GET':
         return 'Hello world!'
     if request.method == 'POST':
+        print('posting')
         img_byte_content = request.form.get('image')
+        print('Byte content type:', type(img_byte_content))
         nparr = np.fromstring(img_byte_content, np.uint8)
         img_np = cv2.imdecode(nparr, cv2.COLOR_BGR2GRAY)
-        return img_np
+        return str(img_np)
