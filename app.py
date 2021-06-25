@@ -10,6 +10,7 @@ import pytesseract
 import base64
 from skimage.filters import threshold_local
 import json
+import re
 
 app = flask.Flask(__name__)
 
