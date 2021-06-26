@@ -36,9 +36,13 @@ def home():
         image = cv2.imdecode(nparr, cv2.COLOR_BGR2GRAY)
         result = bw_scanner(image)
         print(len(result))
-        text = pytesseract.image_to_string(Image.fromarray(result))
+        try:
+            print('doing pytesseract')
+            text = pytesseract.image_to_string(Image.fromarray(result))
+        except e:
+            print(e)
         print(text)
-        data = re.findall(r'(.*) (.*[\.,] ?\d{1,2})[^\d]', text)
+        data = re.findall(r'(.*) (.*[\.,] ?\d{1,2})[^\d]|(.*) (\d+)$', text)
         print(data)
         ret = {'data': []}
         for name, price in data:
