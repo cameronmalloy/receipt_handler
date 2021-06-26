@@ -14,10 +14,11 @@ import re
 
 app = flask.Flask(__name__)
 
+DEFAULT_OFFSET = 20
 
-def bw_scanner(image):
+def bw_scanner(image, offset):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    T = threshold_local(gray, 21, offset = 25, method = "gaussian")
+    T = threshold_local(gray, 21, offset = offset, method = "gaussian")
     return (gray > T).astype("uint8") * 255
 
 @app.route('/', methods=['GET', 'POST'])
@@ -26,15 +27,18 @@ def home():
         return 'Hello world!'
     if request.method == 'POST':
         # Get encoded post form
-        print('posting')
+        print(request.form)
         encoded_img = request.form.get('image')
+        offset = request.form.get('offset')
+        if not offset:
+            offset = DEFAULT_OFFSET
         print('Byte content type:', type(encoded_img))
         img_byte_content = base64.b64decode(encoded_img)
         print('Decoded content type:', type(img_byte_content))
         nparr = np.fromstring(img_byte_content, np.uint8)
         print(len(nparr))
         image = cv2.imdecode(nparr, cv2.COLOR_BGR2GRAY)
-        result = bw_scanner(image)
+        result = bw_scanner(image, offset)
         print(len(result))
         try:
             print('doing pytesseract')
