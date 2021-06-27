@@ -23,7 +23,7 @@ def bw_scanner(image, offset):
     return (gray > T).astype("uint8") * 255
 
 def decode_img_to_nparr(encoded_img):
-    print('Decodinng Image')
+    print('Decoding Image')
     img_byte_content = base64.b64decode(encoded_img)
     print('Converting to np array')
     nparr = np.fromstring(img_byte_content, np.uint8)
@@ -60,7 +60,7 @@ def home():
             if not offset:
                 offset = DEFAULT_OFFSET
             bw_arr = get_offset_img(encoded_img, offset)
-            encoded_bw_img = encoded_img(bw_arr)
+            encoded_bw_img = encode_img(bw_arr)
             return json.dumps({'image': encoded_bw_img})
         elif request_type == 'tesseract':
             image_arr = decode_img_to_nparr(encoded_img)
