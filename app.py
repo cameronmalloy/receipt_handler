@@ -75,10 +75,10 @@ def home():
             ret = {'data': []}
             for (name1, price1, name2, price2) in data:
                 if price1:
-                    data_value = {name1: price1}
+                    data_value = {'name': name1, 'price': price1}
                     ret['data'].append(data_value)
                 else:
-                    data_value = {name2: price2}
+                    data_value = {'name': name2, 'price': price2}
                     ret['data'].append(data_value)
             print(ret)
             return json.dumps(ret)
