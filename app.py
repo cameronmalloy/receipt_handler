@@ -52,6 +52,7 @@ def home():
         if request_type == 'bw':
             offset = request.form.get('offset')
             print('Offset', offset)
+            print('Offset type', type(offset))
             if not offset:
                 offset = DEFAULT_OFFSET
             bw_arr = get_offset_img(encoded_img, offset)
