@@ -62,7 +62,7 @@ def home():
             try:
                 print('doing pytesseract')
                 text = pytesseract.image_to_string(Image.fromarray(image_arr))
-            except e:
+            except Exception as e:
                 print(e)
             print(text)
             data = re.findall(r'(.*) (.*[\.,] ?\d{1,2})[^\d]|(.*) (\d+)$', text)
