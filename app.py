@@ -45,12 +45,16 @@ def home():
         return 'Hello world!'
     if request.method == 'POST':
         # Get encoded post form
+        print("Posting")
         print(request.form.keys())
         request_type = request.form.get('type')
         encoded_img = request.form.get('image')
         print('Request type', request_type)
         if request_type == 'bw':
-            offset = request.form.get('offset')
+            try:
+                offset = int(request.form.get('offset'))
+            except ValueError:
+                offset = None
             print('Offset', offset)
             print('Offset type', type(offset))
             if not offset:
