@@ -13,10 +13,6 @@ import json
 import re
 from io import BytesIO
 
-buffered = BytesIO()
-Image.fromarray(result).save(buffered, format="JPEG")
-img_str = base64.b64encode(buffered.getvalue())
-
 app = flask.Flask(__name__)
 
 DEFAULT_OFFSET = 20
@@ -52,8 +48,10 @@ def home():
         print(request.form.keys())
         request_type = request.form.get('type')
         encoded_img = request.form.get('image')
+        print('Request type', request_type)
         if request_type == 'bw':
             offset = request.form.get('offset')
+            print('Offset', offset)
             if not offset:
                 offset = DEFAULT_OFFSET
             bw_arr = get_offset_img(encoded_img, offset)
