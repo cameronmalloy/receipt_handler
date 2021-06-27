@@ -36,7 +36,7 @@ def encode_img(image_arr):
     image = Image.fromarray(image_arr)
     buffered = BytesIO()
     image.save(buffered, format='JPEG')
-    img_str = base64.bb64encode(buffered.getvalue())
+    img_str = base64.b64encode(buffered.getvalue())
     return img_str
 
 @app.route('/', methods=['GET', 'POST'])
