@@ -16,6 +16,7 @@ from io import BytesIO
 app = flask.Flask(__name__)
 
 DEFAULT_OFFSET = 20
+RESIZE = 500
 
 def bw_scanner(image, offset):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -41,6 +42,7 @@ def encode_img(image_arr):
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    global RESIZE
     if request.method == 'GET':
         return 'Hello world!'
     if request.method == 'POST':
@@ -68,14 +70,15 @@ def home():
             print(img.size)
             resize_x, resize_y = img.size
             is_resize = False
-            if resize_x > 1000:
-                resize_x = 1000
+            if resize_x > RESIZE:
+                resize_x = RESIZE
                 is_resize = True
-            if resize_y > 1000:
-                resize_y = 1000
+            if resize_y > RESIZE:
+                resize_y = RESIZE
                 is_resize = True
             if is_resize:
                 img = img.resize((resize_x, resize_y), Image.ANTIALIAS)
+            print(img.size)
             text = ""
             try:
                 print('doing pytesseract')
