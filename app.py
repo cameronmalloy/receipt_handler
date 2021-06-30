@@ -16,7 +16,7 @@ from io import BytesIO
 app = flask.Flask(__name__)
 
 DEFAULT_OFFSET = 20
-RESIZE = 1000
+RESIZE = 800
 
 def bw_scanner(image, offset):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
