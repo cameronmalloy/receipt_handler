@@ -64,6 +64,7 @@ def home():
             return json.dumps({'image': encoded_bw_img})
         elif request_type == 'tesseract':
             image_arr = decode_img_to_nparr(encoded_img)
+            text = ""
             try:
                 print('doing pytesseract')
                 # text = tesserocr.image_to_text(Image.fromarray(image_arr))
