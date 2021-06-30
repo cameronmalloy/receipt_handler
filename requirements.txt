@@ -5,4 +5,3 @@ opencv-python==4.5.2.54
 scikit-image==0.18.1
 Pillow==8.2.0
 pytesseract==0.3.7
-tesserocr==2.5.2
