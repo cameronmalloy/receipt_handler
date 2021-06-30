@@ -64,11 +64,23 @@ def home():
             return json.dumps({'image': encoded_bw_img})
         elif request_type == 'tesseract':
             image_arr = decode_img_to_nparr(encoded_img)
+            img = Image.fromarray(image_arr)
+            print(img.size)
+            resize_x, resize_y = img.size
+            is_resize = False
+            if resize_x > 1000:
+                resize_x = 1000
+                is_resize = True
+            if resize_y > 1000:
+                resize_y = 1000
+                is_resize = True
+            if is_resize:
+            img = img.resize((resize_x, resize_y), Image.ANTIALIAS)
             text = ""
             try:
                 print('doing pytesseract')
                 # text = tesserocr.image_to_text(Image.fromarray(image_arr))
-                text = pytesseract.image_to_string(Image.fromarray(image_arr))
+                text = pytesseract.image_to_string(img)
             except Exception as e:
                 print(e)
             print(text)
