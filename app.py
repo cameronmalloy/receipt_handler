@@ -6,7 +6,7 @@ try:
 except ImportError:
     import Image
 import cv2
-import pytesseract
+import tesserocr
 import base64
 from skimage.filters import threshold_local
 import json
@@ -66,7 +66,8 @@ def home():
             image_arr = decode_img_to_nparr(encoded_img)
             try:
                 print('doing pytesseract')
-                text = pytesseract.image_to_string(Image.fromarray(image_arr))
+                text = tesserocr.image_to_text(Image.fromarray(image_arr))
+                # text = pytesseract.image_to_string(Image.fromarray(image_arr))
             except Exception as e:
                 print(e)
             print(text)
