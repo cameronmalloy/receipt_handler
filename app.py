@@ -6,7 +6,7 @@ try:
 except ImportError:
     import Image
 import cv2
-# import tesserocr
+import pytesseract
 import base64
 from skimage.filters import threshold_local
 import json
