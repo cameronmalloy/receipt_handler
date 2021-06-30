@@ -87,7 +87,7 @@ def home():
             except Exception as e:
                 print(e)
             print(text)
-            data = re.findall(r'(.*) (.*[\.,] ?\d{1,2})[^\d]|(.*) (\d+)$', text)
+            data = re.findall(r'(.*) .*(\d+[\.,] ?\d{1,2})[^\d]|(.*) (\d+)$', text)
             print(data)
             ret = {'data': []}
             for (name1, price1, name2, price2) in data:
