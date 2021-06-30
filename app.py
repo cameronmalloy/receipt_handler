@@ -75,7 +75,7 @@ def home():
                 resize_y = 1000
                 is_resize = True
             if is_resize:
-            img = img.resize((resize_x, resize_y), Image.ANTIALIAS)
+                img = img.resize((resize_x, resize_y), Image.ANTIALIAS)
             text = ""
             try:
                 print('doing pytesseract')
